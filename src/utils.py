@@ -4,7 +4,7 @@ import typer
 import json
 
 # local imports
-from src.main import APP_NAME
+from main import APP_NAME
 
 
 """
