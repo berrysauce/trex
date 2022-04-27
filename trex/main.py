@@ -1,8 +1,9 @@
 import os
+from distutils.errors import DistutilsFileError
+from distutils.dir_util import copy_tree
 import typer
 from tabulate import tabulate
 from typing import Optional
-from distutils.dir_util import copy_tree
 
 # local imports
 from trex import utils
@@ -11,6 +12,13 @@ from trex import utils
 app = typer.Typer()
 APP_NAME = utils.APP_NAME
 APP_VERSION = utils.APP_VERSION
+
+
+# TODO:  return stored_config[name]
+# KeyError: 'test1'
+
+# TODO: Formatting of prints
+# like WARNING?
 
 
 @app.command()
@@ -32,11 +40,11 @@ def version():
 
     more_info = typer.style("""
         Honey, it's the Templatosaurus Rex!
-        Docs and more at berrysauce.me/trex
+        Docs and more at berrysauce.me/trex2
     """, fg=typer.colors.WHITE, bold=False)
 
     path_info = typer.style(f"""
-    trex is located at:
+    trex2 is located at:
     {dir_path}
     """, fg=typer.colors.BRIGHT_BLACK, bold=False)
 
@@ -53,7 +61,7 @@ def create(name: str):
         typer.secho(f"✅ {name} created!" + "\n", fg=typer.colors.BRIGHT_GREEN)
     else:
         typer.secho("⚠️ A template with this name already exists" + "\n", fg=typer.colors.YELLOW)
-    utils.show_tip(f"Use 'trex make {name}' to create a new directory from the template")
+    utils.show_tip(f"Use 'trex2 make {name}' to create a new directory from the template")
 
 
 @app.command()
@@ -74,14 +82,26 @@ def make(name: str, target: Optional[str] = typer.Argument(None)):
     res = utils.get_template(name)
 
     typer.secho("    Moving files around...", fg=typer.colors.BRIGHT_YELLOW)
-    if target:
-        destination = str(os.getcwd()) + "/" + target
-        typer.secho("    Creating target directory...", fg=typer.colors.BRIGHT_YELLOW)
-        os.mkdir(destination)
-    else:
-        destination = str(os.getcwd())
+    try:
+        if target:
+            destination = str(os.getcwd()) + "/" + target
+            typer.secho("    Creating target directory...", fg=typer.colors.BRIGHT_YELLOW)
+            os.mkdir(destination)
+        else:
+            destination = str(os.getcwd())
+    except FileExistsError:
+        typer.secho("\n" + "🛑️ Failed - File or directory already exists!" + "\n", fg=typer.colors.RED)
 
-    copy_tree(res["location"], destination)
+    try:
+        copy_tree(res["location"], destination)
+    except DistutilsFileError:
+        typer.secho("\n" + "🛑️ Failed - Template directory doesn't seem to exist anymore!", fg=typer.colors.RED)
+        typer.secho(" 🚧 Removing template...", fg=typer.colors.BRIGHT_YELLOW)
+        typer.secho("    Removing target directory...", fg=typer.colors.BRIGHT_YELLOW)
+        os.rmdir(destination)
+        if utils.remove_template(name) is True:
+            typer.secho(f"✅ {name} was removed!" + "\n", fg=typer.colors.BRIGHT_GREEN)
+        return
     typer.secho(f"✅ Created from {name}!" + "\n", fg=typer.colors.BRIGHT_GREEN)
 
 @app.command()
@@ -101,14 +121,14 @@ def all():
         data.append([key_list[i], values_list[i]["location"]])
 
     typer.echo(tabulate(data, headers=head, tablefmt="grid") + "\n")
-    utils.show_tip(f"Use 'trex make <template name>' to create a new directory from the template")
+    utils.show_tip(f"Use 'trex2 make <template name>' to create a new directory from the template")
 
 
 @app.command()
 def reset(force: bool = typer.Option(False)):
     if force is False:
         warning = typer.style(" ⚠️ WARNING ", fg=typer.colors.WHITE, bg=typer.colors.YELLOW, bold=True)
-        typer.confirm("\n" + warning + " Do you really want to reset trex and delete all its data?", abort=True)
+        typer.confirm("\n" + warning + " Do you really want to reset trex2 and delete all its data?", abort=True)
 
     dir_path, config_path, templates_path = utils.get_app_dir()
     try:

@@ -4,7 +4,7 @@ import typer
 import json
 
 # app info
-APP_NAME = "trex"
+APP_NAME = "trex2"
 APP_VERSION = "0.1.1"
 
 
@@ -149,5 +149,5 @@ def show_tip(msg: str):
         return
 
     tip_title = typer.style(" TIP ", fg=typer.colors.WHITE, bg=typer.colors.GREEN, bold=True)
-    tip = 100 * "-" + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex config tips --disable'\n" + 100 * "-" + "\n"
+    tip = 100 * "-" + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex2 config tips --disable'\n" + 100 * "-" + "\n"
     typer.echo(tip)
