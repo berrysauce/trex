@@ -3,8 +3,9 @@ from pathlib import Path
 import typer
 import json
 
-# local imports
-from main import APP_NAME
+# app info
+APP_NAME = "trex"
+APP_VERSION = "0.1.1"
 
 
 """
@@ -58,16 +59,43 @@ def add_template(name: str, data: dict):
     return True
 
 
-def get_template(name: str):
+def get_template(name):
     dir_path, config_path, templates_path = get_app_dir()
     check_app_dir()
 
     try:
         with open(templates_path, "r") as f:
             stored_config = json.loads(f.read())
-        return stored_config[name]
-    except FileNotFoundError or KeyError:
+    except FileNotFoundError:
         return None
+    except KeyError:
+        return None
+
+    if name is None:
+        return stored_config
+    else:
+        return stored_config[name]
+
+
+def remove_template(name: str):
+    dir_path, config_path, templates_path = get_app_dir()
+    check_app_dir()
+
+    try:
+        with open(templates_path, "r") as f:
+            stored_config = json.loads(f.read())
+        stored_config.pop(name)
+    except FileNotFoundError:
+        return None
+    except KeyError:
+        return None
+
+    with open(templates_path, "w") as f:
+        f.write(json.dumps(stored_config))
+
+    return True
+
+
 
 
 """
@@ -102,7 +130,9 @@ def get_config(key: str):
         with open(config_path, "r") as f:
             stored_config = json.loads(f.read())
         return stored_config[key]
-    except FileNotFoundError or KeyError:
+    except FileNotFoundError:
+        return None
+    except KeyError:
         return None
 
 
