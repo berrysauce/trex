@@ -5,6 +5,7 @@
     <br>
     <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/berrysauce/trex?label=size">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/berrysauce/trex">
+    <img alt="GitHub CodeQL" src="https://github.com/berrysauce/trex/actions/workflows/codeql-analysis.yml/badge.svg"> ***
     <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/trex?label=PyPi%20downloads">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/trex">
     <img alt="PyPI - Status" src="https://img.shields.io/pypi/status/trex">
