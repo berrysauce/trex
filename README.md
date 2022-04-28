@@ -1,6 +1,11 @@
-# trex
-Templatosaurus Rex: Create and manage project templates in your terminal 🦖
+<img alt="trex Logo" src="https://eu2.contabostorage.com/d74bc97ec80c4b13b7f1db8d39948228:brry-cdn/trex/9BDF18AD-FC14-455D-8C58-EDA42E4355A3.jpeg">
 
+<h1 align=center>trex</h1>
+<p align=center>
+    Templatosaurus Rex: Create and manage project templates in your terminal 🦖
+</p>
+
+---
 
 ## License
 
