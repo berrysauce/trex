@@ -1,8 +1,13 @@
 <img alt="trex Logo" src="https://eu2.contabostorage.com/d74bc97ec80c4b13b7f1db8d39948228:brry-cdn/trex/9BDF18AD-FC14-455D-8C58-EDA42E4355A3.jpeg">
 
-<h1 align=center>trex</h1>
 <p align=center>
-    Templatosaurus Rex: Create and manage project templates in your terminal 🦖
+    <strong>Templatosaurus Rex: Create and manage project templates in your terminal 🦖</strong>
+    <br>
+    <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/berrysauce/trex?label=size">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/berrysauce/trex">
+    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/trex?label=PyPi%20downloads">
+    <img alt="PyPI" src="https://img.shields.io/pypi/v/trex">
+    <img alt="PyPI - Status" src="https://img.shields.io/pypi/status/trex">
 </p>
 
 ---
