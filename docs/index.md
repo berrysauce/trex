@@ -16,6 +16,8 @@ Getting started with a new project? trex helps you out by initializing a project
 
 ## How to install trex
 
+> ⚠ As of right now, I do not own the `trex` PyPi package name. This is just a filler for now.
+
 Open your terminal and run the following line:
 ```
 pip install trex
