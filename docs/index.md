@@ -51,4 +51,4 @@ Reset trex's data.
 
 ## Support or Contact
 
-If you need any help, I'm available via email at trex[at]berrysauce[dot]com. If you find any security issues, please also send them to the mentioned email address. Otherwise, if you find any bugs or would like to have a certain feature, make a pull request yourself, or create an issue [here](https://github.com/berrysauce/trex/issues).
+If you need any help, I'm available via email at trex[at]berrysauce[dot]me. If you find any security issues, please also send them to the mentioned email address. Otherwise, if you find any bugs or would like to have a certain feature, make a pull request yourself, or create an issue [here](https://github.com/berrysauce/trex/issues).
