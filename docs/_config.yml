@@ -1,4 +1,5 @@
 title: trex 🦖
-logo: docs/assets/img/logo.PNG
+tagline: Create and manage project templates in your terminal
+logo: /docs/assets/img/logo.PNG
 show_downloads: false
 theme: jekyll-theme-minimal
