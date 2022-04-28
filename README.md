@@ -12,7 +12,19 @@
 
 ---
 
-## License
+## 🦖 What is trex?
+trex is template manager in the form of a CLI app. You can creat, organise, and clone-from template directories. It doesn't matter if the template is a directory on your machine or a GitHub repository: with trex you only need a few seconds to actually get to coding. Not only that, but trex is really easy to use.
+
+## 🚧 Features and Roadmap
+- [x] Organise templates (create, remove, list)
+- [x] Make project from local directory template
+- [ ] Make project from GitHub template  
+- [ ] Run scripts automatically on creation
+- [ ] Create virtualenv automatically and import requirements on creation
+
+→ Do you have any feature requests? [Submit them here](https://github.com/berrysauce/trex/issues).
+
+## 📜 License
 
 trex: A modern and intuitive templating CLI
 Copyright (C) 2022 berrysauce (Paul Haedrich)
