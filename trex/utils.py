@@ -2,10 +2,13 @@ import os
 from pathlib import Path
 import typer
 import json
+import random
 
-# app info
-APP_NAME = "trex2"
-APP_VERSION = "0.1.1"
+# local imports
+from trex import meta
+
+APP_NAME = meta.APP_NAME
+APP_VERSION = meta.APP_VERSION
 
 
 """
@@ -108,6 +111,9 @@ def add_config(key: str, data):
     dir_path, config_path, templates_path = get_app_dir()
     check_app_dir()
 
+    if key not in meta.config_options:
+        return None
+
     try:
         with open(config_path, "r") as f:
             stored_config = f.read()
@@ -149,5 +155,35 @@ def show_tip(msg: str):
         return
 
     tip_title = typer.style(" TIP ", fg=typer.colors.WHITE, bg=typer.colors.GREEN, bold=True)
-    tip = 100 * "-" + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex2 config tips --disable'\n" + 100 * "-" + "\n"
+    tip = 100 * "." + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex config tips --disable'\n" + 100 * "."
     typer.echo(tip)
+
+
+"""
+=============================================================
+                      PRINT HANDLING
+=============================================================
+"""
+
+def print_start():
+    show_intro = get_config("intro")
+    if show_intro is not None and show_intro is False:
+        return
+    working = random.choice(meta.working_strings)
+    typer.secho("🦖 " + working, fg=typer.colors.BRIGHT_GREEN)
+
+def print_warn(msg: str):
+    warn_title = typer.style(" WARN! ", fg=typer.colors.BRIGHT_YELLOW, bg=typer.colors.YELLOW, bold=True)
+    typer.echo(warn_title + " " + msg)
+
+def print_error(msg: str):
+    warn_title = typer.style(" ERROR ", fg=typer.colors.BRIGHT_RED, bg=typer.colors.RED, bold=True)
+    typer.echo(warn_title + " " + msg)
+
+def print_working(msg: str):
+    warn_title = typer.style(" ..... ", fg=typer.colors.BRIGHT_CYAN, bg=typer.colors.CYAN, bold=True)
+    typer.echo(warn_title + " " + msg)
+
+def print_done(msg: str):
+    warn_title = typer.style(" DONE! ", fg=typer.colors.BRIGHT_GREEN, bg=typer.colors.GREEN, bold=True)
+    typer.echo(warn_title + " " + msg)

@@ -6,20 +6,21 @@ from tabulate import tabulate
 from typing import Optional
 
 # local imports
-from trex import utils
+from trex import utils, meta
 
 # app configuration
 app = typer.Typer()
-APP_NAME = utils.APP_NAME
-APP_VERSION = utils.APP_VERSION
+APP_NAME = meta.APP_NAME
+APP_VERSION = meta.APP_VERSION
 
+
+# ======================================================================================
+# TREX TODOS
 
 # TODO:  return stored_config[name]
 # KeyError: 'test1'
 
-# TODO: Formatting of prints
-# like WARNING?
-
+# ======================================================================================
 
 @app.command()
 def version():
@@ -40,11 +41,11 @@ def version():
 
     more_info = typer.style("""
         Honey, it's the Templatosaurus Rex!
-        Docs and more at berrysauce.me/trex2
+        Docs and more at berrysauce.me/trex
     """, fg=typer.colors.WHITE, bold=False)
 
     path_info = typer.style(f"""
-    trex2 is located at:
+    trex is located at:
     {dir_path}
     """, fg=typer.colors.BRIGHT_BLACK, bold=False)
 
@@ -53,104 +54,116 @@ def version():
 
 @app.command()
 def create(name: str):
+    utils.print_start()
+
+    utils.print_working("Getting template location")
     location = str(os.getcwd())
-    typer.secho("\n" + "🚧 Creating template...", fg=typer.colors.BRIGHT_YELLOW)
+
+    utils.print_working("Adding template to storage")
     res = utils.add_template(name, {"location": location})
 
     if res:
-        typer.secho(f"✅ {name} created!" + "\n", fg=typer.colors.BRIGHT_GREEN)
+        utils.print_done(f"Added '{name}' as template")
     else:
-        typer.secho("⚠️ A template with this name already exists" + "\n", fg=typer.colors.YELLOW)
-    utils.show_tip(f"Use 'trex2 make {name}' to create a new directory from the template")
+        utils.print_warn("A template with this name already exists")
+    utils.show_tip(f"Use 'trex make {name}' to create a new directory from the template")
 
 
 @app.command()
 def remove(name: str):
-    typer.secho("\n" + "🚧 Removing template...", fg=typer.colors.BRIGHT_YELLOW)
+    utils.print_start()
+    utils.print_working("Removing template")
+
     if utils.remove_template(name) is True:
-        typer.secho(f"✅ {name} was removed!" + "\n", fg=typer.colors.BRIGHT_GREEN)
+        utils.print_done(f"{name} template was removed")
     else:
-        typer.secho(f"⚠️ {name} doesn't exist" + "\n", fg=typer.colors.YELLOW)
+        utils.print_warn(f"{name} template doesn't exist")
 
 
 @app.command()
-def make(name: str, target: Optional[str] = typer.Argument(None)):
-    typer.secho("\n" + " 🦖 Rooaaar! I'm ready!", fg=typer.colors.BRIGHT_GREEN)
-    typer.secho(" 🚧 Making from template", fg=typer.colors.BRIGHT_YELLOW)
+def make(name: str, target: str):
+    utils.print_start()
+    utils.print_working(f"Making directory from {name} template")
 
-    typer.secho("    Fetching template data...", fg=typer.colors.BRIGHT_YELLOW)
+    utils.print_working("Fetching template data")
     res = utils.get_template(name)
 
-    typer.secho("    Moving files around...", fg=typer.colors.BRIGHT_YELLOW)
+    utils.print_working("Moving files around")
     try:
-        if target:
-            destination = str(os.getcwd()) + "/" + target
-            typer.secho("    Creating target directory...", fg=typer.colors.BRIGHT_YELLOW)
-            os.mkdir(destination)
-        else:
-            destination = str(os.getcwd())
+        destination = str(os.getcwd()) + "/" + target
+        utils.print_working("Creating target directory")
+        os.mkdir(destination)
     except FileExistsError:
-        typer.secho("\n" + "🛑️ Failed - File or directory already exists!" + "\n", fg=typer.colors.RED)
+        utils.print_error("File or directory already exists")
 
     try:
         copy_tree(res["location"], destination)
     except DistutilsFileError:
-        typer.secho("\n" + "🛑️ Failed - Template directory doesn't seem to exist anymore!", fg=typer.colors.RED)
-        typer.secho(" 🚧 Removing template...", fg=typer.colors.BRIGHT_YELLOW)
-        typer.secho("    Removing target directory...", fg=typer.colors.BRIGHT_YELLOW)
+        utils.print_error("Template directory doesn't seem to exist anymore")
+        utils.print_working("Removing template")
+        utils.print_working("Removing target directory")
+
         os.rmdir(destination)
         if utils.remove_template(name) is True:
-            typer.secho(f"✅ {name} was removed!" + "\n", fg=typer.colors.BRIGHT_GREEN)
+            utils.print_done(f"{name} was removed")
         return
-    typer.secho(f"✅ Created from {name}!" + "\n", fg=typer.colors.BRIGHT_GREEN)
+    utils.print_done(f"Created {target} from {name}")
 
 @app.command()
 def all():
-    typer.secho("\n" + "All available templates:", fg=typer.colors.BRIGHT_GREEN)
     res = utils.get_template(name=None)
+    if res is None:
+        utils.print_warn("Create a template first")
+        return
+
+    typer.secho("All available templates:", fg=typer.colors.BRIGHT_GREEN)
     head = ["Name", "Location"]
     data = []
     key_list = list(res.keys())
     values_list = list(res.values())
 
-    if len(key_list) == 0:
-        typer.secho(f"⚠️ Create a template first" + "\n", fg=typer.colors.YELLOW)
-        return
-
     for i in range(len(key_list)):
         data.append([key_list[i], values_list[i]["location"]])
 
-    typer.echo(tabulate(data, headers=head, tablefmt="grid") + "\n")
-    utils.show_tip(f"Use 'trex2 make <template name>' to create a new directory from the template")
+    typer.echo(tabulate(data, headers=head, tablefmt="grid"))
+    utils.show_tip(f"Use 'trex make <template name>' to create a new directory from the template")
 
 
 @app.command()
 def reset(force: bool = typer.Option(False)):
+    utils.print_start()
     if force is False:
         warning = typer.style(" ⚠️ WARNING ", fg=typer.colors.WHITE, bg=typer.colors.YELLOW, bold=True)
-        typer.confirm("\n" + warning + " Do you really want to reset trex2 and delete all its data?", abort=True)
+        typer.confirm("\n" + warning + " Do you really want to reset trex and delete all its data?", abort=True)
 
     dir_path, config_path, templates_path = utils.get_app_dir()
     try:
+        utils.print_working("Deleting trex config files and directories")
         os.remove(config_path)
         os.remove(templates_path)
         os.rmdir(dir_path)
     except FileNotFoundError or NotADirectoryError:
         pass
-    typer.secho(f"✅ Reset complete" + "\n", fg=typer.colors.BRIGHT_GREEN)
+    utils.print_done("Reset complete")
 
 
 
 @app.command()
-def config(name: str, enable: bool = typer.Option(False), disable: bool = typer.Option(False)):
+def config(key: str, enable: bool = typer.Option(False), disable: bool = typer.Option(False)):
+    utils.print_start()
+
+    if key not in meta.config_options:
+        utils.print_warn(f"{key} is not a valid config option")
+        return
+
     if enable:
         value = True
     elif disable:
         value = False
     else:
-        typer.secho("\n" + "🛑️ You need to provide --enable or --disable" + "\n", fg=typer.colors.RED)
+        utils.print_warn("You need to provide --enable or --disable")
         return
 
-    typer.secho("\n" + "🚧️ Updating config", fg=typer.colors.BRIGHT_YELLOW)
-    utils.add_config(name, data=value)
-    typer.secho(f"✅ {name} set to {value}!" + "\n", fg=typer.colors.BRIGHT_GREEN)
+    utils.print_working("Updating config")
+    utils.add_config(key, data=value)
+    utils.print_done(f"{key} set to {value}")
