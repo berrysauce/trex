@@ -1,5 +1,5 @@
-from trex import __version__
+from trex.meta import APP_VERSION
 
 
 def test_version():
-    assert __version__ == '0.1.0'
+    assert APP_VERSION == '0.1.2'
