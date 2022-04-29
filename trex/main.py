@@ -144,9 +144,19 @@ def reset(force: bool = typer.Option(False)):
 
     dir_path, config_path, templates_path = utils.get_app_dir()
     try:
-        utils.print_working("Deleting trex config files and directories")
+        utils.print_working("Deleting config storage")
         os.remove(config_path)
+    except FileNotFoundError or NotADirectoryError:
+        pass
+
+    try:
+        utils.print_working("Deleting templates storage")
         os.remove(templates_path)
+    except FileNotFoundError or NotADirectoryError:
+        pass
+
+    try:
+        utils.print_working("Deleting trex storage directory")
         os.rmdir(dir_path)
     except FileNotFoundError or NotADirectoryError:
         pass
