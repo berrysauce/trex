@@ -1,5 +1,5 @@
 import os
-import git as gitutil
+import git as gitpython
 from distutils.errors import DistutilsFileError
 from distutils.dir_util import copy_tree
 import typer
@@ -111,7 +111,7 @@ def make(name: str, target: str, git: bool = typer.Option(False)):
 
     if git is True:
         utils.print_working("Initializing git repo")
-        gitutil.Repo.init(destination)
+        gitpython.Repo.init(destination)
 
     utils.print_done(f"Created {target} from {name}")
 
