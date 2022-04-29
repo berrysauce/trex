@@ -20,6 +20,7 @@ trex is template manager in the form of a CLI app. You can creat, organise, and 
 - [x] Organise templates (create, remove, list)
 - [x] Make project from local directory template
 - [ ] Make project from GitHub template  
+- [x] Create git repository on creation
 - [ ] Run scripts automatically on creation
 - [ ] Create virtualenv automatically and import requirements on creation
 

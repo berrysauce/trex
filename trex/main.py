@@ -1,4 +1,5 @@
 import os
+import git as gitutil
 from distutils.errors import DistutilsFileError
 from distutils.dir_util import copy_tree
 import typer
@@ -81,7 +82,7 @@ def remove(name: str):
 
 
 @app.command()
-def make(name: str, target: str):
+def make(name: str, target: str, git: bool = typer.Option(False)):
     utils.print_start()
     utils.print_working(f"Making directory from {name} template")
 
@@ -107,6 +108,11 @@ def make(name: str, target: str):
         if utils.remove_template(name) is True:
             utils.print_done(f"{name} was removed")
         return
+
+    if git is True:
+        utils.print_working("Initializing git repo")
+        gitutil.Repo.init(destination)
+
     utils.print_done(f"Created {target} from {name}")
 
 @app.command()
