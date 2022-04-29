@@ -4,6 +4,7 @@ orbs:
 jobs:
   build:
     executor: python/default
+    resource_class: small
     steps:
       - checkout
       - python/install-packages:
