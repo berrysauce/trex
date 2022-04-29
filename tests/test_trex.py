@@ -11,7 +11,7 @@ test_config = "tips"
 
 """
 MISSING
-- make
+- make (with/without git)
 """
 
 
