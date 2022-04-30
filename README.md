@@ -14,7 +14,7 @@
 ---
 
 ## 🦖 What is trex?
-trex is template manager in the form of a CLI app. You can creat, organise, and clone-from template directories. It doesn't matter if the template is a directory on your machine or a GitHub repository: with trex you only need a few seconds to actually get to coding. Not only that, but trex is really easy to use.
+trex is a template manager in the form of a CLI app. You can create, organize, and clone-from template directories. It doesn’t matter if the template is a directory on your machine or a GitHub repository: with trex you only need a few seconds to actually get to coding. Not only that, but trex is really easy to use.
 
 ## 🚧 Features and Roadmap
 - [x] Organise templates (create, remove, list)
