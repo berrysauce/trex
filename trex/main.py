@@ -1,5 +1,9 @@
 import os
+import sys
+import platform
 import git as gitpython
+import venv as venvpython
+import subprocess
 from distutils.errors import DistutilsFileError
 from distutils.dir_util import copy_tree
 import typer
@@ -18,8 +22,7 @@ APP_VERSION = meta.APP_VERSION
 # ======================================================================================
 # TREX TODOS
 
-# TODO:  return stored_config[name]
-# KeyError: 'test1'
+# yaaay, it's empty!
 
 # ======================================================================================
 
@@ -82,7 +85,7 @@ def remove(name: str):
 
 
 @app.command()
-def make(name: str, target: str, git: bool = typer.Option(False)):
+def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = typer.Option(False)):
     utils.print_start()
     utils.print_working(f"Making directory from {name} template")
 
@@ -99,6 +102,7 @@ def make(name: str, target: str, git: bool = typer.Option(False)):
         os.mkdir(destination)
     except FileExistsError:
         utils.print_error("File or directory already exists")
+        return
 
     try:
         copy_tree(res["location"], destination)
@@ -112,11 +116,43 @@ def make(name: str, target: str, git: bool = typer.Option(False)):
             utils.print_done(f"{name} was removed")
         return
 
+    if venv is True:
+        # for documentation: https://docs.python.org/3/library/venv.html#venv.create
+        # and: https://docs.python.org/3/library/venv.html#venv.EnvBuilder
+        utils.print_working("Initializing virtual environment (venv)")
+        venvpython.create(destination+"/venv", system_site_packages=False, clear=False, symlinks=False, with_pip=True, prompt=None, upgrade_deps=False)
+
+        utils.print_warn("Sorry, but requirements installation is not yet supported. You'll have to do that yourself after activating your newly created venv")
+        """
+        MIGHT WORK, CHECK LATER
+        
+        try:
+            os.chdir(destination)
+            current_system = platform.system()
+            utils.print_working("Activating venv")
+            if current_system == "Windows":
+                os.system(f"source {destination}/venv/bin/activate")
+            elif current_system == "Linux":
+                os.system(f"source {destination}/venv/bin/activate")
+            elif current_system == "Darwin":
+                # or MacOS
+                os.system(f"source {destination}/venv/bin/activate")
+                
+            utils.print_working("Installing requirements")
+            typer.echo(utils.terminal_width * "-")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+            typer.echo(utils.terminal_width * "-")
+        except subprocess.CalledProcessError:
+            typer.echo(utils.terminal_width * "-")
+            utils.print_warn("requirements.txt not found (no requirements installed)")
+        """
+
     if git is True:
         utils.print_working("Initializing git repo")
         gitpython.Repo.init(destination)
 
     utils.print_done(f"Created {target} from {name}")
+
 
 @app.command()
 def all():
@@ -163,7 +199,6 @@ def reset(force: bool = typer.Option(False)):
     except FileNotFoundError or NotADirectoryError:
         pass
     utils.print_done("Reset complete")
-
 
 
 @app.command()

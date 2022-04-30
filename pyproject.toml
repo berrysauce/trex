@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trex"
-version = "0.1.3"
+version = "0.1.4"
 description = "Templatosaurus Rex 🦖 Create and manage project templates in your terminal"
 authors = ["Paul Haedrich <paul@berrysauce.me>"]
 readme = "README.md"
