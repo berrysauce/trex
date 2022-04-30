@@ -9,6 +9,9 @@ CHANGE VALUES HERE WHEN UPDATED (VERSION)
 APP_NAME = "trex"
 APP_VERSION = "0.1.3"
 
+# Server info
+TREX_SERVER = "trexapi.deta.dev"
+
 # Config options
 config_options = [
     "intro",

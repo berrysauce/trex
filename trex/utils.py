@@ -10,6 +10,8 @@ from trex import meta
 APP_NAME = meta.APP_NAME
 APP_VERSION = meta.APP_VERSION
 
+terminal_width, terminal_height = os.get_terminal_size()
+
 
 """
 =============================================================
@@ -69,15 +71,15 @@ def get_template(name):
     try:
         with open(templates_path, "r") as f:
             stored_config = json.loads(f.read())
+
+        if name is None:
+            return stored_config
+        else:
+            return stored_config[name]
     except FileNotFoundError:
         return None
     except KeyError:
         return None
-
-    if name is None:
-        return stored_config
-    else:
-        return stored_config[name]
 
 
 def remove_template(name: str):
@@ -154,8 +156,8 @@ def show_tip(msg: str):
     if show_tips is not None and show_tips is False:
         return
 
-    tip_title = typer.style(" TIP ", fg=typer.colors.WHITE, bg=typer.colors.GREEN, bold=True)
-    tip = 100 * "." + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex config tips --disable'\n" + 100 * "."
+    tip_title = typer.style(" TIP ", fg=typer.colors.BLACK, bg=typer.colors.WHITE, bold=True)
+    tip = terminal_width * "." + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex config tips --disable'\n" + terminal_width * "."
     typer.echo(tip)
 
 
@@ -173,17 +175,17 @@ def print_start():
     typer.secho("🦖 " + working, fg=typer.colors.BRIGHT_GREEN)
 
 def print_warn(msg: str):
-    warn_title = typer.style(" WARN! ", fg=typer.colors.BRIGHT_YELLOW, bg=typer.colors.YELLOW, bold=True)
+    warn_title = typer.style(" WARN! ", fg=typer.colors.BRIGHT_YELLOW, bold=True)
     typer.echo(warn_title + " " + msg)
 
 def print_error(msg: str):
-    warn_title = typer.style(" ERROR ", fg=typer.colors.BRIGHT_RED, bg=typer.colors.RED, bold=True)
+    warn_title = typer.style(" ERROR ", fg=typer.colors.BRIGHT_RED, bold=True)
     typer.echo(warn_title + " " + msg)
 
 def print_working(msg: str):
-    warn_title = typer.style(" ..... ", fg=typer.colors.BRIGHT_CYAN, bg=typer.colors.CYAN, bold=True)
+    warn_title = typer.style(" ..... ", fg=typer.colors.BRIGHT_CYAN, bold=True)
     typer.echo(warn_title + " " + msg)
 
 def print_done(msg: str):
-    warn_title = typer.style(" DONE! ", fg=typer.colors.BRIGHT_GREEN, bg=typer.colors.GREEN, bold=True)
+    warn_title = typer.style(" DONE! ", fg=typer.colors.BRIGHT_GREEN, bold=True)
     typer.echo(warn_title + " " + msg)

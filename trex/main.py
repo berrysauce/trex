@@ -88,6 +88,9 @@ def make(name: str, target: str, git: bool = typer.Option(False)):
 
     utils.print_working("Fetching template data")
     res = utils.get_template(name)
+    if res is None:
+        utils.print_error("Template not found")
+        return
 
     utils.print_working("Moving files around")
     try:
@@ -137,10 +140,9 @@ def all():
 
 @app.command()
 def reset(force: bool = typer.Option(False)):
-    utils.print_start()
     if force is False:
-        warning = typer.style(" ⚠️ WARNING ", fg=typer.colors.WHITE, bg=typer.colors.YELLOW, bold=True)
-        typer.confirm("\n" + warning + " Do you really want to reset trex and delete all its data?", abort=True)
+        warning = typer.style(" ⚠️ WARNING ", fg=typer.colors.BRIGHT_YELLOW, bold=True)
+        typer.confirm(warning + " Do you really want to reset trex and delete all its data?", abort=True)
 
     dir_path, config_path, templates_path = utils.get_app_dir()
     try:
