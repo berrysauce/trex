@@ -1,4 +1,4 @@
-<img alt="trex Logo" src="https://eu2.contabostorage.com/d74bc97ec80c4b13b7f1db8d39948228:brry-cdn/trex/9BDF18AD-FC14-455D-8C58-EDA42E4355A3.jpeg">
+<img alt="trex Logo" src="https://brry-cdn.s3.fr-par.scw.cloud/assets/trex-banner.jpg">
 
 <p align=center>
     <strong>Templatosaurus Rex: Create and manage project templates in your terminal 🦖</strong>
