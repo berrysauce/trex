@@ -1,4 +1,4 @@
-<img alt="trex Logo" src="https://brry-cdn.s3.fr-par.scw.cloud/assets/trex-banner.jpg">
+<img alt="trex Logo" src="https://cdn.berrysauce.me/assets/trex-banner.jpg">
 
 <p align=center>
     <strong>Templatosaurus Rex: Create and manage project templates in your terminal 🦖</strong>
@@ -58,3 +58,5 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 For legal questions, contact legal[at]berrysauce[dot]me.
+
+<a href="https://deta.sh/?ref=basketball" target="_blank"><img src="https://cdn.berrysauce.me/assets/deta-sponsor-banner.jpg" alt="Sponsored by Deta"></a>
