@@ -1,4 +1,4 @@
-<img alt="trex Logo" src="https://eu2.contabostorage.com/d74bc97ec80c4b13b7f1db8d39948228:brry-cdn/trex/9BDF18AD-FC14-455D-8C58-EDA42E4355A3.jpeg">
+<img alt="trex Logo" src="https://cdn.berrysauce.me/assets/trex-banner.jpg">
 
 <p align=center>
     <strong>Templatosaurus Rex: Create and manage project templates in your terminal 🦖</strong>
@@ -8,6 +8,7 @@
     <img alt="GitHub CodeQL" src="https://github.com/berrysauce/trex/actions/workflows/codeql-analysis.yml/badge.svg">
     <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/trex?label=PyPi%20downloads">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/trex">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/trex">
     <img alt="PyPI - Status" src="https://img.shields.io/pypi/status/trex">
 </p>
 
@@ -27,6 +28,7 @@ trex is a template manager in the form of a CLI app. You can create, organize, a
 → Do you have any feature requests? [Submit them here](https://github.com/berrysauce/trex/issues).
 
 ## Install trex
+**Make sure you have Python 3.9 or above installed on your system.**
 
 > ⚠ As of right now, I do not own the `trex` PyPi package name. This is just a filler for now.
 
@@ -58,3 +60,5 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 For legal questions, contact legal[at]berrysauce[dot]me.
+
+<a href="https://deta.sh/?ref=basketball" target="_blank"><img src="https://cdn.berrysauce.me/assets/deta-sponsor-banner.jpg" alt="Sponsored by Deta"></a>
