@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 import platform
 import git as gitpython
 import venv as venvpython
@@ -85,7 +86,7 @@ def remove(name: str):
 
 
 @app.command()
-def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = typer.Option(False)):
+def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = typer.Option(False), installdeps: bool = typer.Option(False)):
     utils.print_start()
     utils.print_working(f"Making directory from {name} template")
 
@@ -119,9 +120,19 @@ def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = t
     if venv is True:
         # for documentation: https://docs.python.org/3/library/venv.html#venv.create
         # and: https://docs.python.org/3/library/venv.html#venv.EnvBuilder
-        utils.print_working("Initializing virtual environment (venv)")
-        venvpython.create(destination+"/venv", system_site_packages=False, clear=False, symlinks=False, with_pip=True, prompt=None, upgrade_deps=False)
+        utils.print_working("Initializing virtual environment (venv) as .venv")
+        # upgrade_deps=False since Python 3.9
+        try:
+            venvpython.create(destination+"/.venv", system_site_packages=False, clear=False, symlinks=False, with_pip=True, prompt=None, upgrade_deps=False)
+        except Exception as exception:
+            utils.print_error("Exception while initializing venv as .venv: \n" + str(exception))
+            utils.print_working("Removing target directory")
+            shutil.rmtree(destination)
+            utils.print_done("Removed target directory")
+            return
 
+    if installdeps is True:
+        utils.print_working("Installing dependencies from requirements.txt")
         utils.print_warn("Sorry, but requirements installation is not yet supported. You'll have to do that yourself after activating your newly created venv")
         """
         MIGHT WORK, CHECK LATER

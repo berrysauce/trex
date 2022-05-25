@@ -157,7 +157,7 @@ def show_tip(msg: str):
         return
 
     tip_title = typer.style(" TIP ", fg=typer.colors.BLACK, bg=typer.colors.WHITE, bold=True)
-    tip = terminal_width * "." + "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex config tips --disable'\n" + terminal_width * "."
+    tip = "\n" + tip_title + f" {msg}\n" + "Disable tips with 'trex config tips --disable'\n"
     typer.echo(tip)
 
 
