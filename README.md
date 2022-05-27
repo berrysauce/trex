@@ -1,8 +1,6 @@
 <img alt="trex Logo" src="https://cdn.berrysauce.me/assets/trex-banner.jpg">
-
-<p align=center>
-    <strong>Templatosaurus Rex: Create and manage project templates in your terminal 🦖</strong>
-    <br>
+<p align="center"><strong>Templatosaurus Rex: Create and manage project templates in your terminal 🦖</strong></p>
+<p align="center">
     <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/berrysauce/trex?label=size">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/berrysauce/trex">
     <img alt="GitHub CodeQL" src="https://github.com/berrysauce/trex/actions/workflows/codeql-analysis.yml/badge.svg">
