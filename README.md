@@ -30,8 +30,6 @@ trex is a template manager in the form of a CLI app. You can create, organize, a
 ## Install trex
 **Make sure you have Python 3.9 or above installed on your system.**
 
-> ⚠ As of right now, I do not own the `trex` PyPi package name. This is just a filler for now.
-
 trex is available on PyPi and can be installed via pip with the following command:
 ```
 pip install trex

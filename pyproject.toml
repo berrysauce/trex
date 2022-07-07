@@ -2,8 +2,19 @@
 name = "trex"
 version = "0.1.4"
 description = "Templatosaurus Rex 🦖 Create and manage project templates in your terminal"
+license = "GPL-3.0-only"
 authors = ["Paul Haedrich <paul@berrysauce.me>"]
 readme = "README.md"
+homepage = "https://berrysauce.me/trex"
+repository = "https://github.com/berrysauce/trex"
+documentation = "https://berrysauce.me/trex"
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: Utilities"
+]
 
 [tool.poetry.scripts]
 trex = "trex.main:app"
