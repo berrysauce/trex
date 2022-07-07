@@ -10,6 +10,8 @@ from distutils.dir_util import copy_tree
 import typer
 from tabulate import tabulate
 from typing import Optional
+import requests
+import json
 
 # local imports
 from trex import utils, meta
@@ -54,7 +56,24 @@ def version():
     {dir_path}
     """, fg=typer.colors.BRIGHT_BLACK, bold=False)
 
-    typer.echo(logo_text+logo_line+more_info+path_info)
+    version_info = """
+    ⚠️ A new version of trex is available
+    Upgrade with 'pip install trex --upgrade'
+    """
+
+    try:
+        res = requests.get("https://pypi.org/pypi/trex/json")
+        latest_version = json.loads(res.text)["info"]["version"]
+        if meta.APP_VERSION != latest_version:
+            update_notice = typer.style(version_info, fg=typer.colors.BRIGHT_YELLOW, bold=True)
+        else:
+            # do not remove - referenced before assignment
+            update_notice = """"""
+    except requests.exceptions.RequestException:
+        # do not remove - referenced before assignment
+        update_notice = """"""
+
+    typer.echo(logo_text+logo_line+more_info+path_info+update_notice)
 
 
 @app.command()
@@ -214,8 +233,6 @@ def reset(force: bool = typer.Option(False)):
 
 @app.command()
 def config(key: str, enable: bool = typer.Option(False), disable: bool = typer.Option(False)):
-    utils.print_start()
-
     if key not in meta.config_options:
         utils.print_warn(f"{key} is not a valid config option")
         return

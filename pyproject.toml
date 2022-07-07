@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trex"
-version = "0.1.4"
+version = "0.1.5"
 description = "Templatosaurus Rex 🦖 Create and manage project templates in your terminal"
 license = "GPL-3.0-only"
 authors = ["Paul Haedrich <paul@berrysauce.me>"]
@@ -24,6 +24,7 @@ python = "^3.9"
 typer = "^0.4.1"
 tabulate = "^0.8.9"
 GitPython = "^3.1.27"
+requests = "^2.28.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

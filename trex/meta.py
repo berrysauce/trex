@@ -7,7 +7,7 @@ CHANGE VALUES HERE WHEN UPDATED (VERSION)
 
 # App info
 APP_NAME = "trex"
-APP_VERSION = "0.1.4"
+APP_VERSION = "0.1.5"
 
 # Server info
 TREX_SERVER = "trexapi.deta.dev"
