@@ -11,12 +11,11 @@ Getting started with a new project? trex helps you out by initializing a project
 - [x] Organize templates (create, remove, list)
 - [x] Make project from local directory template
 - [ ] Make project from GitHub template
+- [x] Create git repository on creation
 - [ ] Run scripts automatically on creation
 - [ ] Create a virtual environment automatically and import requirements on creation
 
 ## How to install trex
-
-> ⚠ As of right now, I do not own the `trex` PyPi package name. This is just a filler for now.
 
 Open your terminal and run the following line:
 ```
