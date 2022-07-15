@@ -7,7 +7,6 @@
     <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/trex?label=PyPi%20downloads">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/trex">
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/trex">
-    <img alt="PyPI - Status" src="https://img.shields.io/pypi/status/trex">
 </p>
 
 ---
