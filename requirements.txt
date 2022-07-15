@@ -1,3 +1,5 @@
 typer
 tabulate
 gitpython
+requests
+trex

@@ -20,7 +20,7 @@ trex is a template manager in the form of a CLI app. You can create, organize, a
 - [ ] Make project from GitHub template  
 - [x] Create git repository on creation
 - [ ] Run scripts automatically on creation
-- [ ] Create virtualenv automatically and import requirements on creation
+- [x] Create virtualenv automatically and import requirements on creation
 
 → Do you have any feature requests? [Submit them here](https://github.com/berrysauce/trex/issues).
 
@@ -35,6 +35,9 @@ Check if the installation was successful:
 ```
 trex version
 ```
+
+## 📘 Documentation
+Read more here → https://berrysauce.me/trex
 
 ## 📜 License
 

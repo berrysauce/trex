@@ -1,17 +1,13 @@
 import os
-import sys
 import shutil
-import platform
-import git as gitpython
 import venv as venvpython
-import subprocess
 from distutils.errors import DistutilsFileError
 from distutils.dir_util import copy_tree
+import json
+import git as gitpython
 import typer
 from tabulate import tabulate
-from typing import Optional
 import requests
-import json
 
 # local imports
 from trex import utils, meta
@@ -31,6 +27,10 @@ APP_VERSION = meta.APP_VERSION
 
 @app.command()
 def version():
+    """
+    Show the current version of trex and check for new ones
+    """
+
     dir_path, config_path, templates_path = utils.get_app_dir()
     logo_text = typer.style("""
                  _
@@ -78,6 +78,10 @@ def version():
 
 @app.command()
 def create(name: str):
+    """
+    Create a new trex template from the folder you're in
+    """
+
     utils.print_start()
 
     utils.print_working("Getting template location")
@@ -95,6 +99,10 @@ def create(name: str):
 
 @app.command()
 def remove(name: str):
+    """
+    Remove a template from trexs
+    """
+
     utils.print_start()
     utils.print_working("Removing template")
 
@@ -105,7 +113,15 @@ def remove(name: str):
 
 
 @app.command()
-def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = typer.Option(False), installdeps: bool = typer.Option(False)):
+def make(name: str,
+         target: str,
+         git: bool = typer.Option(False),
+         venv: bool = typer.Option(False),
+         installdeps: bool = typer.Option(False)):
+    """
+    Make a project from a trex template
+    """
+
     utils.print_start()
     utils.print_working(f"Making directory from {name} template")
 
@@ -142,7 +158,15 @@ def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = t
         utils.print_working("Initializing virtual environment (venv) as .venv")
         # upgrade_deps=False since Python 3.9
         try:
-            venvpython.create(destination+"/.venv", system_site_packages=False, clear=False, symlinks=False, with_pip=True, prompt=None, upgrade_deps=False)
+            venvpython.create(
+                destination+"/.venv",
+                system_site_packages=False,
+                clear=False,
+                symlinks=False,
+                with_pip=True,
+                prompt=None,
+                upgrade_deps=False
+            )
         except Exception as exception:
             utils.print_error("Exception while initializing venv as .venv: \n" + str(exception))
             utils.print_working("Removing target directory")
@@ -151,31 +175,23 @@ def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = t
             return
 
     if installdeps is True:
-        utils.print_working("Installing dependencies from requirements.txt")
-        utils.print_warn("Sorry, but requirements installation is not yet supported. You'll have to do that yourself after activating your newly created venv")
-        """
-        MIGHT WORK, CHECK LATER
-        
-        try:
-            os.chdir(destination)
-            current_system = platform.system()
-            utils.print_working("Activating venv")
-            if current_system == "Windows":
-                os.system(f"source {destination}/venv/bin/activate")
-            elif current_system == "Linux":
-                os.system(f"source {destination}/venv/bin/activate")
-            elif current_system == "Darwin":
-                # or MacOS
-                os.system(f"source {destination}/venv/bin/activate")
-                
-            utils.print_working("Installing requirements")
-            typer.echo(utils.terminal_width * "-")
-            subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-            typer.echo(utils.terminal_width * "-")
-        except subprocess.CalledProcessError:
-            typer.echo(utils.terminal_width * "-")
-            utils.print_warn("requirements.txt not found (no requirements installed)")
-        """
+        utils.print_working("Installing dependencies from requirements.txt (might take a bit)")
+
+        if os.path.isfile(destination + "/requirements.txt"):
+            try:
+                typer.echo(utils.terminal_width * "-")
+                os.chdir(destination)
+                if os.system(f"cd {destination}/.venv/bin && ./pip install -r {destination}/requirements.txt") == 0:
+                    typer.echo(utils.terminal_width * "-")
+                    utils.print_done("Requirements installed")
+                else:
+                    typer.echo(utils.terminal_width * "-")
+                    raise OSError("Error installing requirements")
+            except OSError:
+                utils.print_warn("Requirement installation error - skipping")
+        else:
+            utils.print_warn(f"requirements.txt not found at {destination} - skipped")
+
 
     if git is True:
         utils.print_working("Initializing git repo")
@@ -185,7 +201,11 @@ def make(name: str, target: str, git: bool = typer.Option(False), venv: bool = t
 
 
 @app.command()
-def all():
+def show():
+    """
+    List all trex templates
+    """
+
     res = utils.get_template(name=None)
     if res is None:
         utils.print_warn("Create a template first")
@@ -197,15 +217,19 @@ def all():
     key_list = list(res.keys())
     values_list = list(res.values())
 
-    for i in range(len(key_list)):
-        data.append([key_list[i], values_list[i]["location"]])
+    for i, value in enumerate(key_list):
+        data.append([value, values_list[i]["location"]])
 
     typer.echo(tabulate(data, headers=head, tablefmt="grid"))
-    utils.show_tip(f"Use 'trex make <template name>' to create a new directory from the template")
+    utils.show_tip("Use 'trex make <template name>' to create a new directory from the template")
 
 
 @app.command()
 def reset(force: bool = typer.Option(False)):
+    """
+    Reset trex's data, configuration, and templates
+    """
+
     if force is False:
         warning = typer.style(" ⚠️ WARNING ", fg=typer.colors.BRIGHT_YELLOW, bold=True)
         typer.confirm(warning + " Do you really want to reset trex and delete all its data?", abort=True)
@@ -233,6 +257,10 @@ def reset(force: bool = typer.Option(False)):
 
 @app.command()
 def config(key: str, enable: bool = typer.Option(False), disable: bool = typer.Option(False)):
+    """
+    Change trex's configuration
+    """
+
     if key not in meta.config_options:
         utils.print_warn(f"{key} is not a valid config option")
         return
