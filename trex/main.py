@@ -49,6 +49,8 @@ def version():
     more_info = typer.style("""
         Honey, it's the Templatosaurus Rex!
         Docs and more at berrysauce.me/trex
+        
+        Use trex --help to see all commands
     """, fg=typer.colors.WHITE, bold=False)
 
     path_info = typer.style(f"""

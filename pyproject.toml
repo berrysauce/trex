@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trex"
-version = "0.1.5"
+version = "0.1.6"
 description = "Templatosaurus Rex 🦖 Create and manage project templates in your terminal"
 license = "GPL-3.0-only"
 authors = ["Paul Haedrich <paul@berrysauce.me>"]
