@@ -170,11 +170,11 @@ def make(name: str,
 
     utils.print_working("Fetching template data")
     res = utils.get_template(name)
+    location = res["location"]
     if res is None:
         utils.print_error("Template not found")
         return
 
-    utils.print_working("Moving files around")
     try:
         destination = str(os.getcwd()) + "/" + target
         utils.print_working("Creating target directory")
@@ -183,16 +183,25 @@ def make(name: str,
         utils.print_error("File or directory already exists")
         return
 
-    try:
-        copy_tree(res["location"], destination)
-    except DistutilsFileError:
-        utils.print_error("Template directory doesn't seem to exist anymore")
-        utils.print_working("Removing template")
-        utils.print_working("Removing target directory")
+    if res["type"] == "local":
+        utils.print_working("Moving files around")
+        try:
+            copy_tree(location, destination)
+        except DistutilsFileError:
+            utils.print_error("Template directory doesn't seem to exist anymore")
+            utils.print_working("Removing template")
+            utils.print_working("Removing target directory")
 
-        os.rmdir(destination)
-        if utils.remove_template(name) is True:
-            utils.print_done(f"{name} was removed")
+            os.rmdir(destination)
+            if utils.remove_template(name) is True:
+                utils.print_done(f"{name} was removed")
+            return
+    elif res["type"] == "remote":
+        utils.print_working(f"Cloning {location} from GitHub (this might take a bit)")
+        gitpython.Repo.clone_from(location, destination)
+        utils.print_done("Repo cloned")
+    else:
+        utils.print_error(f"Unknown template type ({res['type']})")
         return
 
     if venv is True:
