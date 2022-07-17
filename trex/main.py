@@ -1,5 +1,8 @@
 import os
+import pathlib
 import shutil
+import platform
+import subprocess
 import venv as venvpython
 from distutils.errors import DistutilsFileError
 from distutils.dir_util import copy_tree
@@ -79,7 +82,15 @@ def version():
 
 
 @app.command()
-def create(name: str):
+def support():
+    """
+    Report issues or request features for trex
+    """
+    typer.launch("https://github.com/berrysauce/trex/issues/new/choose")
+
+
+@app.command()
+def new(name: str):
     """
     Create a new trex template from the folder you're in
     """
@@ -90,13 +101,46 @@ def create(name: str):
     location = str(os.getcwd())
 
     utils.print_working("Adding template to storage")
-    res = utils.add_template(name, {"location": location})
+    res = utils.add_template(name, {"location": location, "type": "local"})
 
     if res:
         utils.print_done(f"Added '{name}' as template")
     else:
         utils.print_warn("A template with this name already exists")
     utils.show_tip(f"Use 'trex make {name}' to create a new directory from the template")
+
+
+@app.command()
+def remote(name: str, url: str):
+    """
+    Create a new trex template from a GitHub Repository
+    """
+
+    utils.print_start()
+
+    # when regex is to complicated...
+    utils.print_working("Checking URL")
+    if not url.startswith("https://github.com/") and url.count("/") != 4:
+        # these checks check for this format: https://github.com/username/repo
+        utils.print_error(
+        """URL Format does not comply with the GitHub Repository URL format.
+        It has to comply with this format: https://github.com/username/repo""")
+        return
+
+    res = requests.get(url)
+    if res.status_code != 200:
+        utils.print_error(f"Got status code {res.status_code} from {url}")
+        return
+
+    utils.print_working("Adding template to storage")
+    res = utils.add_template(name, {"location": url, "type": "remote"})
+
+    if res:
+        utils.print_done(f"Added '{name}' as template")
+    else:
+        utils.print_warn("A template with this name already exists")
+    utils.show_tip(f"Use 'trex make {name}' to create a new directory from the template")
+
 
 
 @app.command()
@@ -203,10 +247,33 @@ def make(name: str,
 
 
 @app.command()
-def show():
+def set(path: str):
+    if not os.path.isdir(path):
+        utils.print_warn(f"{path} is not a directory")
+        return
+
+    utils.print_working("Updating config")
+    utils.add_config("path", data=path)
+    utils.print_done(
+        f"""trex's templates directory is now set to {path}
+Folders you put into this directory will automatically be added to trex as templates.""")
+
+
+@app.command()
+def all(open: bool = typer.Option(False)):
     """
     List all trex templates
     """
+
+    trex_path = utils.get_config("path")
+    if trex_path is None:
+        utils.print_warn("trex's templates path is not set. Set it with 'trex set PATH'")
+        return
+
+    if open:
+        typer.secho(f"Opening templates directory at {trex_path}", fg=typer.colors.BRIGHT_GREEN)
+        typer.launch(trex_path)
+        return
 
     res = utils.get_template(name=None)
     if res is None:
@@ -214,13 +281,13 @@ def show():
         return
 
     typer.secho("All available templates:", fg=typer.colors.BRIGHT_GREEN)
-    head = ["Name", "Location"]
+    head = ["Name", "Location", "Type"]
     data = []
     key_list = list(res.keys())
     values_list = list(res.values())
 
     for i, value in enumerate(key_list):
-        data.append([value, values_list[i]["location"]])
+        data.append([value, values_list[i]["location"], values_list[i]["type"]])
 
     typer.echo(tabulate(data, headers=head, tablefmt="grid"))
     utils.show_tip("Use 'trex make <template name>' to create a new directory from the template")

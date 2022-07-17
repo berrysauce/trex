@@ -15,7 +15,8 @@ TREX_SERVER = "trexapi.deta.dev"
 # Config options
 config_options = [
     "intro",
-    "tips"
+    "tips",
+    "path"
 ]
 
 # "Getting to work" strings
