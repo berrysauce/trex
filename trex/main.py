@@ -1,4 +1,5 @@
 import os
+import io
 import shutil
 import venv as venvpython
 from distutils.errors import DistutilsFileError
@@ -8,6 +9,8 @@ import git as gitpython
 import typer
 from tabulate import tabulate
 import requests
+import zipfile
+import pathlib
 
 # local imports
 from trex import utils, meta
@@ -177,8 +180,9 @@ def make(name: str,
 
     try:
         destination = str(os.getcwd()) + "/" + target
-        utils.print_working("Creating target directory")
-        os.mkdir(destination)
+        if not git:
+            utils.print_working("Creating target directory")
+            os.mkdir(destination)
     except FileExistsError:
         utils.print_error("File or directory already exists")
         return
@@ -197,9 +201,44 @@ def make(name: str,
                 utils.print_done(f"{name} was removed")
             return
     elif res["type"] == "remote":
-        utils.print_working(f"Cloning {location} from GitHub (this might take a bit)")
-        gitpython.Repo.clone_from(location, destination)
-        utils.print_done("Repo cloned")
+        utils.print_working(f"Downloading {location} from GitHub (this might take a bit)")
+
+        path = pathlib.Path(destination)
+        temp_destination = path.parent
+
+        request = requests.get(location + "/archive/master.zip")
+
+        # this header has the file name
+        file_header = request.headers.get("Content-Disposition")
+        # split file name from attachment; filename=******.zip
+        file_name = file_header.split("filename=", 1)[1]
+        # split dir name from ******.zip
+        dir_name = file_name.split(".", 1)[0]
+
+        if os.path.exists(str(temp_destination) + "/" + dir_name):
+            utils.print_error(str(temp_destination) + "/" + dir_name + " already exists!")
+            return
+
+        if os.path.exists(destination):
+            utils.print_error(destination + " already exists!")
+            return
+
+        if request.status_code != 200:
+            utils.print_error(f"Request error: {request.status_code}")
+            os.rmdir(destination)
+            return
+
+        try:
+            utils.print_working("Extracting repo from memory")
+            with zipfile.ZipFile(io.BytesIO(request.content)) as z:
+                z.extractall(temp_destination)
+                os.rename(str(temp_destination) + "/" + dir_name, destination)
+        except zipfile.BadZipfile:
+            utils.print_error("Invalid zip file")
+            os.rmdir(str(temp_destination) + "/" + file_name)
+            return
+
+        utils.print_done("Repo downloaded")
     else:
         utils.print_error(f"Unknown template type ({res['type']})")
         return
