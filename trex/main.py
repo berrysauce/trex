@@ -293,6 +293,10 @@ def make(name: str,
 
 @app.command()
 def set(path: str):
+    """
+    Set template directory path. All folders created or moved in here will automatically be available as templates.
+    """
+
     if not os.path.isdir(path):
         utils.print_warn(f"{path} is not a directory")
         return
