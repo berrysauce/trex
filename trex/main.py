@@ -142,7 +142,6 @@ def remote(name: str, url: str):
     utils.show_tip(f"Use 'trex make {name}' to create a new directory from the template")
 
 
-
 @app.command()
 def remove(name: str):
     """
