@@ -1,9 +1,163 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<link rel="stylesheet" href="/path/to/styles/default.min.css">
-<script src="/path/to/highlight.min.js"></script>
-<script>hljs.highlightAll();</script><meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><title>trex 🦖 The Project Templates Manager</title><meta name="twitter:description" content="Manage Python project templates easily with trex. It handles everything from virtual environment initialization to git and dependency installation. Get trex now from PyPi."><meta name="twitter:image" content="https://berrysauce.me/trex/assets/img/mstile-150x150.png"><meta name="twitter:card" content="summary"><meta property="og:image" content=""><meta name="description" content="Manage Python project templates easily with trex. It handles everything from virtual environment initialization to git and dependency installation. Get trex now from PyPi."><meta property="og:type" content="website"><meta name="twitter:title" content="trex 🦖 The Project Templates Manager"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png"><link rel="icon" type="image/png" sizes="180x180" href="assets/img/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="assets/img/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="512x512" href="assets/img/android-chrome-512x512.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="assets/css/styles.min.css"></head><body style="font-family: Inter, sans-serif;"><section class="py-4 py-xl-5" style="background: linear-gradient(#2a2a2a 0%, #000000 99%);"><div class="container" style="max-width: 800px;"><div class="text-center p-4 p-lg-5"><h1 class="fw-normal mb-4" style="font-family: 'IBM Plex Sans', sans-serif;margin-right: auto;margin-left: auto;font-size: 35px;margin-bottom: 10px!important;max-width: 550px;color: rgb(255,255,255);"><img src="assets/img/trex-logo-white.png" style="height: 45px;margin-bottom: 30px;"><br>The project&nbsp;<span style="color: rgb(63, 207, 68);">template manager</span> you've been waiting for</h1><p class="text-center" style="margin-right: auto;margin-left: auto;max-width: 550px;color: rgb(157,157,157);"><strong>Managing templates for Python projects is simple with trex.</strong> Stop writing boilerplate code <span style="color: rgba(157, 157, 157, 0.9);">again</span> <span style="color: rgba(157, 157, 157, 0.7);">and again</span> <span style="color: rgba(157, 157, 157, 0.5);">and again</span> <span style="color: rgba(157, 157, 157, 0.3);">and again...</span></p><div style="padding: 15px;border-radius: 5px;background: #2b2b2b;margin-right: auto;margin-left: auto;margin-top: 60px;max-width: 550px;border: 2px solid rgb(63,207,68) ;"><p class="font-monospace" style="margin-bottom: 0px;color: rgb(125,232,75);">$ pip install trex</p></div><p style="max-width: 550px;margin-right: auto;margin-left: auto;margin-top: 10px;font-size: 14px;color: rgb(63,207,68);"><a href="https://github.com/berrysauce/trex/releases" style="color: inherit;" target="_blank">See all releases</a>&nbsp;·&nbsp;<a href="https://github.com/berrysauce/trex/archive/refs/heads/master.zip" style="color: inherit;" target="_blank">Download &amp; install manually</a>&nbsp;·&nbsp;<a href="https://github.com/berrysauce/trex" style="color: inherit;" target="_blank"><i class="fas fa-star" style="color: rgb(255,214,0);margin-right: 3px;"></i>Star on GitHub</a></p><div style="padding: 15px;border-radius: 5px;background: #624600;margin-right: auto;margin-left: auto;margin-top: 30px;max-width: 440px;border: 0px none rgb(63,207,68);"><p style="margin-bottom: 0px;color: rgb(230,154,7);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-info-circle" style="font-size: 20px;margin-bottom: 1px;margin-right: 5px;">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <circle cx="12" cy="12" r="9"></circle>
-  <line x1="12" y1="8" x2="12.01" y2="8"></line>
-  <polyline points="11 12 12 12 12 16 13 16"></polyline>
-</svg>trex currently only supports Python 3.9 and 3.10</p></div></div></div></section><section class="py-4 py-xl-5"><div class="container" style="max-width: 800px;"><div class="text-center p-4 p-lg-5" style="padding: 10px!important;"><h2 class="fw-bold text-start" style="font-family: 'IBM Plex Sans', sans-serif;font-size: 30px;margin-bottom: 30px;margin-top: 30px;">What can trex do?</h2><div class="row" style="margin-bottom: 30px;"><div class="col-12 col-md-6"><p class="text-start" style="margin-bottom: 0px;padding-bottom: 5px;"><strong>trex manages project templates for you.</strong> Just create them easily with one command.</p></div><div class="col"><div class="d-flex justify-content-start align-items-center" style="padding: 12px;background: #2b2b2b;border-radius: 5px;padding-right: 20px;padding-left: 20px;"><code class="text-start language-sh" style="color: rgb(255,255,255);">$ trex new fastapi</code></div></div></div><div class="row" style="margin-bottom: 30px;"><div class="col-12 col-md-6"><p class="text-start" style="margin-bottom: 0px;padding-bottom: 5px;">Want to have a GitHub repository as a template? Just create it as a remote template and trex will do the rest.</p></div><div class="col"><div class="d-flex justify-content-start align-items-center" style="padding: 12px;background: #2b2b2b;border-radius: 5px;padding-right: 20px;padding-left: 20px;"><code class="text-start language-sh" style="color: rgb(255,255,255);">$ trex remote trex https://github.com/berrysauce/trex</code></div></div></div><div class="row" style="margin-bottom: 30px;"><div class="col-12 col-md-6"><p class="text-start" style="margin-bottom: 0px;padding-bottom: 5px;">Want to make it even easier to create templates? Just set a folder to be your templates directory and each folder in it becomes a trex template.</p></div><div class="col"><div class="d-flex justify-content-start align-items-center" style="padding: 12px;background: #2b2b2b;border-radius: 5px;padding-right: 20px;padding-left: 20px;"><code class="text-start language-sh" style="color: rgb(255,255,255);">$ trex set /Users/me/Development/trex</code></div></div></div><div class="row" style="margin-bottom: 30px;"><div class="col-12 col-md-6"><p class="text-start" style="margin-bottom: 0px;padding-bottom: 5px;">You can make trex list all templates and open the templates directory for you.</p></div><div class="col"><div class="d-flex justify-content-start align-items-center" style="padding: 12px;background: #2b2b2b;border-radius: 5px;padding-right: 20px;padding-left: 20px;margin-bottom: 10px;"><code class="text-start language-sh" style="color: rgb(255,255,255);">$ trex all</code></div><div class="d-flex justify-content-start align-items-center" style="padding: 12px;background: #2b2b2b;border-radius: 5px;padding-right: 20px;padding-left: 20px;"><code class="text-start language-sh" style="color: rgb(255,255,255);">$ trex all --open</code></div></div></div><div class="row" style="margin-bottom: 30px;"><div class="col-12 col-md-6"><p class="text-start" style="margin-bottom: 0px;padding-bottom: 5px;">When you're ready, make a new project from a template with only one command. Add flags like<code style="color: rgb(67,70,73);">--venv</code>,&nbsp;<code style="color: rgb(67,70,73);">--git</code>, or&nbsp;<code style="color: rgb(67,70,73);">--installdeps</code>&nbsp;(install dependencies) for more control.</p></div><div class="col"><div class="d-flex justify-content-start align-items-center" style="padding: 12px;background: #2b2b2b;border-radius: 5px;padding-right: 20px;padding-left: 20px;margin-bottom: 10px;"><code class="text-start language-sh" style="color: rgb(255,255,255);">$ trex make fastapi myproject</code></div></div></div></div></div></section><section class="py-4 py-xl-5"><div class="container" style="max-width: 800px;margin-top: -40px;"><div class="text-center p-4 p-lg-5" style="padding: 10px!important;"><div style="padding: 12px;border: 1px solid rgb(207,207,207);border-radius: 5px;"><p class="text-center" style="margin-bottom: 5px;font-weight: bold;font-size: 18px;">Sponsored by&nbsp;<img src="assets/img/deta_logo.svg" style="height: 30px;margin-left: 5px;"></p><p class="text-center" style="margin-bottom: 0px;">Deta is a dev's go-to solution for serverless hosting, NoSQL databases, and file hosting (free &amp; no credit card required).&nbsp;<a href="https://deta.sh/?ref=trex" style="color: inherit;" target="_blank">Sign up for free.</a></p></div><footer class="text-center"><div class="container text-muted py-4 py-lg-5"><ul class="list-inline" style="font-size: 14px;margin-bottom: 10px;"><li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://github.com/berrysauce/trex" style="font-size: 14px;">trex on GitHub</a></li><li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://pypi.org/project/trex/" style="font-size: 14px;">trex on PyPi</a></li><li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://trex.berrysauce.me" style="font-size: 14px;">Documentation</a></li><li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://github.com/berrysauce/trex/issues/new/choose" style="font-size: 14px;">Bug Report</a></li><li class="list-inline-item" style="font-size: 14px;"><a class="link-secondary" href="mailto:trex@berrysauce.me" style="font-size: 14px;">Contact</a></li></ul><p class="mb-0" style="font-size: 14px;">Copyright © 2022 berrysauce</p></div></footer></div></div></section><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/path/to/styles/default.min.css" />
+        <script src="/path/to/highlight.min.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <title>trex 🦖 The Project Templates Manager</title>
+        <meta name="twitter:description" content="Manage Python project templates easily with trex. It handles everything from virtual environment initialization to git and dependency installation. Get trex now from PyPi." />
+        <meta name="twitter:image" content="https://berrysauce.me/trex/assets/img/mstile-150x150.png" />
+        <meta name="twitter:card" content="summary" />
+        <meta property="og:image" content="" />
+        <meta name="description" content="Manage Python project templates easily with trex. It handles everything from virtual environment initialization to git and dependency installation. Get trex now from PyPi." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="trex 🦖 The Project Templates Manager" />
+        <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="180x180" href="assets/img/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/img/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="assets/img/android-chrome-512x512.png" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&amp;display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+        <link rel="stylesheet" href="assets/css/styles.min.css" />
+    </head>
+
+    <body style="font-family: Inter, sans-serif;">
+        <section class="py-4 py-xl-5" style="background: linear-gradient(#2a2a2a 0%, #000000 99%);">
+            <div class="container" style="max-width: 800px;">
+                <div class="text-center p-4 p-lg-5">
+                    <h1 class="fw-normal mb-4" style="font-family: 'IBM Plex Sans', sans-serif; margin-right: auto; margin-left: auto; font-size: 35px; margin-bottom: 10px !important; max-width: 550px; color: rgb(255, 255, 255);">
+                        <img src="assets/img/trex-logo-white.png" style="height: 45px; margin-bottom: 30px;" /><br />
+                        The project&nbsp;<span style="color: rgb(63, 207, 68);">template manager</span> you've been waiting for
+                    </h1>
+                    <p class="text-center" style="margin-right: auto; margin-left: auto; max-width: 550px; color: rgb(157, 157, 157);">
+                        <strong>Managing templates for Python projects is simple with trex.</strong> Stop writing boilerplate code <span style="color: rgba(157, 157, 157, 0.9);">again</span>
+                        <span style="color: rgba(157, 157, 157, 0.7);">and again</span> <span style="color: rgba(157, 157, 157, 0.5);">and again</span> <span style="color: rgba(157, 157, 157, 0.3);">and again...</span>
+                    </p>
+                    <div style="padding: 15px; border-radius: 5px; background: #2b2b2b; margin-right: auto; margin-left: auto; margin-top: 60px; max-width: 550px; border: 2px solid rgb(63, 207, 68);">
+                        <p class="font-monospace" style="margin-bottom: 0px; color: rgb(125, 232, 75);">$ pip install trex</p>
+                    </div>
+                    <p style="max-width: 550px; margin-right: auto; margin-left: auto; margin-top: 10px; font-size: 14px; color: rgb(63, 207, 68);">
+                        <a href="https://github.com/berrysauce/trex/releases" style="color: inherit;" target="_blank">See all releases</a>&nbsp;·&nbsp;
+                        <a href="https://github.com/berrysauce/trex/archive/refs/heads/master.zip" style="color: inherit;" target="_blank">Download &amp; install manually</a>&nbsp;·&nbsp;
+                        <a href="https://github.com/berrysauce/trex" style="color: inherit;" target="_blank"><i class="fas fa-star" style="color: rgb(255, 214, 0); margin-right: 3px;"></i>Star on GitHub</a>
+                    </p>
+                    <div style="padding: 15px; border-radius: 5px; background: #624600; margin-right: auto; margin-left: auto; margin-top: 30px; max-width: 440px; border: 0px none rgb(63, 207, 68);">
+                        <p style="margin-bottom: 0px; color: rgb(230, 154, 7);">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icon-tabler-info-circle"
+                                style="font-size: 20px; margin-bottom: 1px; margin-right: 5px;"
+                            >
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                            </svg>
+                            trex currently only supports Python 3.9 and 3.10
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-4 py-xl-5">
+            <div class="container" style="max-width: 800px;">
+                <div class="text-center p-4 p-lg-5" style="padding: 10px !important;">
+                    <h2 class="fw-bold text-start" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 30px; margin-bottom: 30px; margin-top: 30px;">What can trex do?</h2>
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-12 col-md-6">
+                            <p class="text-start" style="margin-bottom: 0px; padding-bottom: 5px;"><strong>trex manages project templates for you.</strong> Just create them easily with one command.</p>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start align-items-center" style="padding: 12px; background: #2b2b2b; border-radius: 5px; padding-right: 20px; padding-left: 20px;">
+                                <code class="text-start language-sh" style="color: rgb(255, 255, 255);">$ trex new fastapi</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-12 col-md-6">
+                            <p class="text-start" style="margin-bottom: 0px; padding-bottom: 5px;">Want to have a GitHub repository as a template? Just create it as a remote template and trex will do the rest.</p>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start align-items-center" style="padding: 12px; background: #2b2b2b; border-radius: 5px; padding-right: 20px; padding-left: 20px;">
+                                <code class="text-start language-sh" style="color: rgb(255, 255, 255);">$ trex remote trex https://github.com/berrysauce/trex</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-12 col-md-6">
+                            <p class="text-start" style="margin-bottom: 0px; padding-bottom: 5px;">
+                                Want to make it even easier to create templates? Just set a folder to be your templates directory and each folder in it becomes a trex template.
+                            </p>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start align-items-center" style="padding: 12px; background: #2b2b2b; border-radius: 5px; padding-right: 20px; padding-left: 20px;">
+                                <code class="text-start language-sh" style="color: rgb(255, 255, 255);">$ trex set /Users/me/Development/trex</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-12 col-md-6"><p class="text-start" style="margin-bottom: 0px; padding-bottom: 5px;">You can make trex list all templates and open the templates directory for you.</p></div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start align-items-center" style="padding: 12px; background: #2b2b2b; border-radius: 5px; padding-right: 20px; padding-left: 20px; margin-bottom: 10px;">
+                                <code class="text-start language-sh" style="color: rgb(255, 255, 255);">$ trex all</code>
+                            </div>
+                            <div class="d-flex justify-content-start align-items-center" style="padding: 12px; background: #2b2b2b; border-radius: 5px; padding-right: 20px; padding-left: 20px;">
+                                <code class="text-start language-sh" style="color: rgb(255, 255, 255);">$ trex all --open</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-12 col-md-6">
+                            <p class="text-start" style="margin-bottom: 0px; padding-bottom: 5px;">
+                                When you're ready, make a new project from a template with only one command. Add flags like<code style="color: rgb(67, 70, 73);">--venv</code>,&nbsp;<code style="color: rgb(67, 70, 73);">--git</code>,
+                                or&nbsp;<code style="color: rgb(67, 70, 73);">--installdeps</code>&nbsp;(install dependencies) for more control.
+                            </p>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start align-items-center" style="padding: 12px; background: #2b2b2b; border-radius: 5px; padding-right: 20px; padding-left: 20px; margin-bottom: 10px;">
+                                <code class="text-start language-sh" style="color: rgb(255, 255, 255);">$ trex make fastapi myproject</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-4 py-xl-5">
+            <div class="container" style="max-width: 800px; margin-top: -40px;">
+                <div class="text-center p-4 p-lg-5" style="padding: 10px !important;">
+                    <footer class="text-center">
+                        <div class="container text-muted py-4 py-lg-5">
+                            <ul class="list-inline" style="font-size: 14px; margin-bottom: 10px;">
+                                <li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://github.com/berrysauce/trex" style="font-size: 14px;">trex on GitHub</a></li>
+                                <li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://pypi.org/project/trex/" style="font-size: 14px;">trex on PyPi</a></li>
+                                <li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://trex.berrysauce.me" style="font-size: 14px;">Documentation</a></li>
+                                <li class="list-inline-item me-4" style="font-size: 14px;"><a class="link-secondary" href="https://github.com/berrysauce/trex/issues/new/choose" style="font-size: 14px;">Bug Report</a></li>
+                                <li class="list-inline-item" style="font-size: 14px;"><a class="link-secondary" href="mailto:trex@berrysauce.me" style="font-size: 14px;">Contact</a></li>
+                            </ul>
+                            <p class="mb-0" style="font-size: 14px;">Copyright © 2022 berrysauce</p>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
