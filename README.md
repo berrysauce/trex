@@ -25,7 +25,8 @@ trex is a template manager in the form of a CLI app. You can create, organize, a
 → Do you have any feature requests? [Submit them here](https://github.com/berrysauce/trex/issues).
 
 ## ☁️ Install trex
-**Make sure you have Python 3.9 or above installed on your system.**
+> [!IMPORTANT]  
+> Make sure you have Python 3.9 or above installed on your system.
 
 trex is available on PyPi and can be installed via pip with the following command:
 ```
